@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { useRef } from "react";
+import Draggable from "./lib/Draggable";
+import "./index.css";
 
-function App() {
+function App({ callback }) {
+  const handle = useRef(null);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div ref={callback}>
+      <Draggable handleRef={handle} onMove={(x, y) => console.log(x, y)}>
+        <div
+          style={{
+            width: "100px",
+            height: "100px",
+            backgroundColor: "royalblue",
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          <button ref={handle}>Move</button>
+        </div>
+      </Draggable>
     </div>
   );
 }
